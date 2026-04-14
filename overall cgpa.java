@@ -1,15 +1,24 @@
 import java.util.Scanner;
 
-public class CGPACalculator {
+public class overall_cgpa {
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
         int n;
         double totalCredits = 0;
         double weightedSum = 0;
 
+        System.out.println("----- Overall CGPA Calculator -----");
+
         System.out.print("Enter number of subjects: ");
         n = sc.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Invalid number of subjects!");
+            return;
+        }
 
         for (int i = 1; i <= n; i++) {
             System.out.println("\nSubject " + i);
@@ -24,9 +33,26 @@ public class CGPACalculator {
             weightedSum += (credits * gradePoint);
         }
 
-        double cgpa = weightedSum / totalCredits;
+        if (totalCredits == 0) {
+            System.out.println("Error: Total credits cannot be zero!");
+        } else {
+            double cgpa = weightedSum / totalCredits;
 
-        System.out.println("\nOverall CGPA: " + String.format("%.2f", cgpa));
+            System.out.println("\n===== RESULT =====");
+            System.out.println("Total Credits: " + totalCredits);
+            System.out.println("Overall CGPA: " + String.format("%.2f", cgpa));
+
+            // Extra classification (for viva)
+            if (cgpa >= 8.5) {
+                System.out.println("Performance: Excellent");
+            } else if (cgpa >= 6.0) {
+                System.out.println("Performance: Good");
+            } else if (cgpa >= 5.0) {
+                System.out.println("Performance: Average");
+            } else {
+                System.out.println("Performance: Poor");
+            }
+        }
 
         sc.close();
     }
