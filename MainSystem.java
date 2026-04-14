@@ -6,39 +6,117 @@ public class MainSystem {
 
         Scanner sc = new Scanner(System.in);
 
-        // LOGIN
-        System.out.println("Enter Username:");
-        String user = sc.nextLine();
+        double cgpa;
+        int arrears;
+        int choice;
 
-        System.out.println("Enter Password:");
-        String pass = sc.nextLine();
+        do {
+            System.out.println("\n===== Academic Performance System =====");
+            System.out.println("1. Login");
+            System.out.println("2. Enter Student Data");
+            System.out.println("3. View CGPA");
+            System.out.println("4. Status Classification");
+            System.out.println("5. CGPA Analysis");
+            System.out.println("6. Notifications");
+            System.out.println("7. Final Evaluation");
+            System.out.println("8. Generate Report");
+            System.out.println("9. Exit");
 
-        if(!user.equals("admin") || !pass.equals("123")) {
-            System.out.println("Login Failed!");
-            return;
-        }
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
 
-        System.out.println("Login Successful!");
+            switch (choice) {
 
-        // INPUT MARKS
-        double[] marks = {80, 70, 60};
+                case 1:
+                    System.out.println("\n--- Login Module ---");
+                    LoginMain.main(null);   // your login file class name
+                    break;
 
-        // CGPA CALCULATION
-        double sum = 0;
-        for(double m : marks) sum += m;
+                case 2:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
 
-        double cgpa = sum / marks.length;
+                    System.out.print("Enter number of arrears: ");
+                    arrears = sc.nextInt();
 
-        // STATUS
-        String status;
-        if(cgpa >= 7) status = "Good Standing";
-        else if(cgpa >= 5) status = "Academic Warning";
-        else status = "Dismissed";
+                    System.out.println("Data Saved Successfully!");
+                    break;
 
-        // OUTPUT
-        System.out.println("\n--- RESULT ---");
-        System.out.println("CGPA: " + cgpa);
-        System.out.println("Status: " + status);
+                case 3:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
+                    System.out.println("Your CGPA is: " + cgpa);
+                    break;
 
+                case 4:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
+
+                    System.out.print("Enter arrears: ");
+                    arrears = sc.nextInt();
+
+                    String status = StatusClassification.getStatus(cgpa, arrears);
+                    System.out.println("Status: " + status);
+                    break;
+
+                case 5:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
+
+                    String analysis = CGPAAnalysis.analyzeCGPA(cgpa);
+                    System.out.println("Analysis: " + analysis);
+                    break;
+
+                case 6:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
+
+                    System.out.print("Enter arrears: ");
+                    arrears = sc.nextInt();
+
+                    Notifications.showNotification(cgpa, arrears);
+                    break;
+
+                case 7:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
+
+                    System.out.print("Enter arrears: ");
+                    arrears = sc.nextInt();
+
+                    String result = AcademicPerformanceEvaluation.evaluate(cgpa, arrears);
+                    System.out.println(result);
+                    break;
+
+                case 8:
+                    System.out.print("Enter CGPA: ");
+                    cgpa = sc.nextDouble();
+
+                    System.out.print("Enter arrears: ");
+                    arrears = sc.nextInt();
+
+                    String finalStatus = StatusClassification.getStatus(cgpa, arrears);
+                    String finalAnalysis = CGPAAnalysis.analyzeCGPA(cgpa);
+                    String finalEval = AcademicPerformanceEvaluation.evaluate(cgpa, arrears);
+
+                    System.out.println("\n===== REPORT =====");
+                    System.out.println("CGPA: " + cgpa);
+                    System.out.println("Arrears: " + arrears);
+                    System.out.println("Status: " + finalStatus);
+                    System.out.println("Analysis: " + finalAnalysis);
+                    System.out.println(finalEval);
+                    break;
+
+                case 9:
+                    System.out.println("Exiting system...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 9);
+
+        sc.close();
     }
 }
