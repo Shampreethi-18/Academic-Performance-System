@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class EvaluationCriteria {
+        double minCGPA;
+            char minGrade;
+
+                // constructor
+                    EvaluationCriteria(double minCGPA, char minGrade) {
+                                this.minCGPA = minCGPA;
+                                        this.minGrade = minGrade;
+                    }
+
+                        // method to check eligibility
+                            boolean isEligible(double studentCGPA, char studentGrade) {
+                                        return (studentCGPA >= minCGPA) && (studentGrade <= minGrade);
+                            }
+}
+
+public class CriteriaApp {
+        public static void main(String[] args) {
+                    Scanner sc = new Scanner(System.in);
+
+                            // admin sets criteria
+                                    System.out.print("Enter minimum CGPA: ");
+                                            double minCGPA = sc.nextDouble();
+
+                                                    System.out.print("Enter minimum Grade (A/B/C): ");
+                                                            char minGrade = sc.next().toUpperCase().charAt(0);
+
+                                                                    EvaluationCriteria criteria = new EvaluationCriteria(minCGPA, minGrade);
+
+                                                                            // check student
+                                                                                    System.out.print("\nEnter Student CGPA: ");
+                                                                                            double studentCGPA = sc.nextDouble();
+
+                                                                                                    System.out.print("Enter Student Grade: ");
+                                                                                                            char studentGrade = sc.next().toUpperCase().charAt(0);
+
+                                                                                                                    // result
+                                                                                                                            if (criteria.isEligible(studentCGPA, studentGrade)) {
+                                                                                                                                            System.out.println("Result: PASS");
+                                                                                                                            } else {
+                                                                                                                                            System.out.println("Result: FAIL");
+                                                                                                                            }
+
+                                                                                                                                    sc.close();
+        }
+}
+                                                                                                                            }
+                                                                                                                            }
+        }
+}
+                            }
+                    }
+}
