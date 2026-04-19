@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Record {
+        String studentId;
+            String name;
+                int marks;
+
+                    Record(String studentId, String name, int marks) {
+                                this.studentId = studentId;
+                                        this.name = name;
+                                                this.marks = marks;
+                    }
+
+                        void show() {
+                                    System.out.println("ID: " + studentId);
+                                            System.out.println("Name: " + name);
+                                                    System.out.println("Marks: " + marks);
+                                                            System.out.println("--------------------");
+                        }
+}
+
+public class EvaluationHistoryApp {
+        public static void main(String[] args) {
+                    Scanner sc = new Scanner(System.in);
+                            ArrayList<Record> history = new ArrayList<>();
+
+                                    // sample stored data
+                                            history.add(new Record("101", "Arun", 85));
+                                                    history.add(new Record("102", "Priya", 78));
+
+                                                            int choice;
+
+                                                                    do {
+                                                                                    System.out.println("\n1. View Evaluation History");
+                                                                                                System.out.println("2. Exit");
+                                                                                                            System.out.print("Enter choice: ");
+                                                                                                                        choice = sc.nextInt();
+
+                                                                                                                                    if (choice == 1) {
+                                                                                                                                                        if (history.isEmpty()) {
+                                                                                                                                                                                System.out.println("No records found.");
+                                                                                                                                                        } else {
+                                                                                                                                                                                System.out.println("\n--- Evaluation History ---");
+                                                                                                                                                                                                    for (Record r : history) {
+                                                                                                                                                                                                                                r.show();
+                                                                                                                                                                                                    }
+                                                                                                                                                        }
+                                                                                                                                    }
+
+                                                                    } while (choice != 2);
+
+                                                                            sc.close();
+        }
+}
+                                                                                                                                                                                                    }
+                                                                                                                                                        }
+                                                                                                                                                        }
+                                                                                                                                    }
+                                                                    }
+        }
+}
+                        }
+                    }
+}
