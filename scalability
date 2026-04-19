@@ -1,0 +1,150 @@
+import java.io.*;
+import java.util.*;
+
+class Evaluation implements Serializable {
+        String studentId;
+            String name;
+                int m1, m2, m3;
+                    double average;
+                        String grade;
+
+                            Evaluation(String studentId, String name, int m1, int m2, int m3) {
+                                        this.studentId = studentId;
+                                                this.name = name;
+                                                        this.m1 = m1;
+                                                                this.m2 = m2;
+                                                                        this.m3 = m3;
+                                                                                calculate();
+                            }
+
+                                void calculate() {
+                                            int total = m1 + m2 + m3;
+                                                    average = total / 3.0;
+
+                                                            if (average >= 85) grade = "A";
+                                                                    else if (average >= 70) grade = "B";
+                                                                            else if (average >= 50) grade = "C";
+                                                                                    else grade = "Fail";
+                                }
+
+                                    void display() {
+                                                System.out.println(studentId + " | " + name +
+                                                                " | Avg: " + average + " | Grade: " + grade);
+                                    }
+}
+
+class DataManager {
+        private static final String FILE_NAME = "evaluation.dat";
+
+            // Save data
+                public static void save(List<Evaluation> list) {
+                            try (ObjectOutputStream oos =
+                                                 new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+                                                                 oos.writeObject(list);
+                                                 } catch (IOException e) {
+                                                                 System.out.println("Error saving data");
+                                                 }
+                }
+
+                    // Load data
+                        public static List<Evaluation> load() {
+                                    try (ObjectInputStream ois =
+                                                         new ObjectInputStream(new FileInputStream(FILE_NAME))) {
+                                                                         return (List<Evaluation>) ois.readObject();
+                                                         } catch (Exception e) {
+                                                                         return new ArrayList<>();
+                                                         }
+                        }
+}
+
+public class ScalableEvaluationSystem {
+        public static void main(String[] args) {
+                    Scanner sc = new Scanner(System.in);
+
+                            // Load existing data
+                                    List<Evaluation> list = DataManager.load();
+
+                                            int choice;
+
+                                                    do {
+                                                                    System.out.println("\n1. Add Evaluation");
+                                                                                System.out.println("2. View History");
+                                                                                            System.out.println("3. Search by ID");
+                                                                                                        System.out.println("4. Exit");
+                                                                                                                    System.out.print("Choice: ");
+                                                                                                                                choice = sc.nextInt();
+
+                                                                                                                                            switch (choice) {
+
+                                                                                                                                                                case 1:
+                                                                                                                                                                                    sc.nextLine();
+                                                                                                                                                                                                        System.out.print("ID: ");
+                                                                                                                                                                                                                            String id = sc.nextLine();
+
+                                                                                                                                                                                                                                                System.out.print("Name: ");
+                                                                                                                                                                                                                                                                    String name = sc.nextLine();
+
+                                                                                                                                                                                                                                                                                        System.out.print("Marks1: ");
+                                                                                                                                                                                                                                                                                                            int m1 = sc.nextInt();
+
+                                                                                                                                                                                                                                                                                                                                System.out.print("Marks2: ");
+                                                                                                                                                                                                                                                                                                                                                    int m2 = sc.nextInt();
+
+                                                                                                                                                                                                                                                                                                                                                                        System.out.print("Marks3: ");
+                                                                                                                                                                                                                                                                                                                                                                                            int m3 = sc.nextInt();
+
+                                                                                                                                                                                                                                                                                                                                                                                                                list.add(new Evaluation(id, name, m1, m2, m3));
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                    DataManager.save(list); // save immediately
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        System.out.println("Saved!");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            break;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            case 2:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                for (Evaluation e : list) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            e.display();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    case 3:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        sc.nextLine();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            System.out.print("Enter ID: ");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                String searchId = sc.nextLine();
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    boolean found = false;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        for (Evaluation e : list) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    if (e.studentId.equals(searchId)) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    e.display();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                found = true;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (!found) System.out.println("Not found");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                break;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                case 4:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    System.out.println("Exiting...");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        break;
+                                                                                                                                            }
+
+                                                    } while (choice != 4);
+
+                                                            sc.close();
+        }
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                            }
+                                                    }
+        }
+}
+                                                         }
+                                                         }
+                        }
+                                                 }
+                                                 }
+                }
+}
+                                    }
+                                }
+                            }
+}
