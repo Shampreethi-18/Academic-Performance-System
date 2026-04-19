@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+
+// Class to hold student details
+class Result {
+        String studentId;
+            String studentName;
+                int marks1, marks2, marks3;
+
+                    Result(String id, String name, int m1, int m2, int m3) {
+                                studentId = id;
+                                        studentName = name;
+                                                marks1 = m1;
+                                                        marks2 = m2;
+                                                                marks3 = m3;
+                    }
+
+                        // Calculate average
+                            double getAvg() {
+                                        return (marks1 + marks2 + marks3) / 3.0;
+                            }
+
+                                // Decide grade
+                                    String grade() {
+                                                double avg = getAvg();
+                                                        if (avg >= 80) return "A";
+                                                                else if (avg >= 60) return "B";
+                                                                        else if (avg >= 40) return "C";
+                                                                                else return "Fail";
+                                    }
+
+                                        // Print report
+                                            void printReport() {
+                                                        System.out.println("\nStudent ID: " + studentId);
+                                                                System.out.println("Name: " + studentName);
+                                                                        System.out.println("Marks: " + marks1 + ", " + marks2 + ", " + marks3);
+                                                                                System.out.println("Average: " + getAvg());
+                                                                                        System.out.println("Grade: " + grade());
+                                                                                                System.out.println("------------------------");
+                                            }
+}
+
+public class ReportSystem {
+        public static void main(String[] args) {
+
+                    ArrayList<Result> data = new ArrayList<>();
+
+                            // sample records
+                                    data.add(new Result("201", "Kumar", 78, 82, 80));
+                                            data.add(new Result("202", "Meena", 65, 70, 68));
+                                                    data.add(new Result("203", "Ravi", 35, 40, 38));
+
+                                                            System.out.println("=== Academic Performance Report ===");
+
+                                                                    if (data.size() == 0) {
+                                                                                    System.out.println("No data available.");
+                                                                    } else {
+                                                                                    for (Result r : data) {
+                                                                                                        r.printReport();
+                                                                                    }
+                                                                    }
+        }
+}
+                                                                                    }
+                                                                    }
+                                                                    }
+        }
+}
+                                            }
+                                    }
+                            }
+                    }
+}
