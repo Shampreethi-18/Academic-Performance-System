@@ -1,0 +1,109 @@
+import java.util.Scanner;
+
+// Class to store and manage rules
+class RuleSettings {
+        double requiredCGPA;
+            char requiredGrade;
+
+                // Constructor
+                    RuleSettings(double cgpa, char grade) {
+                                requiredCGPA = cgpa;
+                                        requiredGrade = grade;
+                    }
+
+                        // Show current rules
+                            void showRules() {
+                                        System.out.println("\n--- Current Evaluation Rules ---");
+                                                System.out.println("Required CGPA = " + requiredCGPA);
+                                                        System.out.println("Required Grade = " + requiredGrade);
+                            }
+
+                                // Modify rules
+                                    void modifyRules(double newCGPA, char newGrade) {
+
+                                                // Validation
+                                                        if (newCGPA < 0 || newCGPA > 10) {
+                                                                        System.out.println("❌ Invalid CGPA! Must be between 0 and 10.");
+                                                                                    return;
+                                                        }
+
+                                                                requiredCGPA = newCGPA;
+                                                                        requiredGrade = newGrade;
+
+                                                                                System.out.println("✅ Rules updated successfully!");
+                                    }
+}
+
+public class AcademicSystem {
+        public static void main(String[] args) {
+
+                    Scanner sc = new Scanner(System.in);
+
+                            // Default rules
+                                    RuleSettings rules = new RuleSettings(6.0, 'C');
+
+                                            int option;
+
+                                                    do {
+                                                                    System.out.println("\n===== MENU =====");
+                                                                                System.out.println("1. View Rules");
+                                                                                            System.out.println("2. Update Rules");
+                                                                                                        System.out.println("3. Exit");
+                                                                                                                    System.out.print("Choose option: ");
+
+                                                                                                                                while (!sc.hasNextInt()) {
+                                                                                                                                                    System.out.print("Enter a valid number: ");
+                                                                                                                                                                    sc.next();
+                                                                                                                                }
+
+                                                                                                                                            option = sc.nextInt();
+
+                                                                                                                                                        switch (option) {
+
+                                                                                                                                                                            case 1:
+                                                                                                                                                                                                rules.showRules();
+                                                                                                                                                                                                                    break;
+
+                                                                                                                                                                                                                                    case 2:
+                                                                                                                                                                                                                                                        System.out.print("Enter new CGPA: ");
+                                                                                                                                                                                                                                                                            double newCGPA = sc.nextDouble();
+
+                                                                                                                                                                                                                                                                                                System.out.print("Enter new Grade (A/B/C): ");
+                                                                                                                                                                                                                                                                                                                    char newGrade = sc.next().toUpperCase().charAt(0);
+
+                                                                                                                                                                                                                                                                                                                                        // Confirmation step (extra feature)
+                                                                                                                                                                                                                                                                                                                                                            System.out.print("Confirm update? (yes/no): ");
+                                                                                                                                                                                                                                                                                                                                                                                String confirm = sc.next();
+
+                                                                                                                                                                                                                                                                                                                                                                                                    if (confirm.equalsIgnoreCase("yes")) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                rules.modifyRules(newCGPA, newGrade);
+                                                                                                                                                                                                                                                                                                                                                                                                    } else {
+                                                                                                                                                                                                                                                                                                                                                                                                                                System.out.println("Update cancelled.");
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                        break;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                        case 3:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            System.out.println("Exiting system...");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                break;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                default:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    System.out.println("Invalid option!");
+                                                                                                                                                        }
+
+                                                    } while (option != 3);
+
+                                                            sc.close();
+        }
+}
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                        }
+                                                                                                                                }
+                                                    }
+        }
+}
+                                                        }
+                                    }
+                            }
+                    }
+}
