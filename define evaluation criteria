@@ -4,7 +4,7 @@ class EvaluationCriteria {
         double minCGPA;
             char minGrade;
 
-                // constructor
+                
                     EvaluationCriteria(double minCGPA, char minGrade) {
                                 this.minCGPA = minCGPA;
                                         this.minGrade = minGrade;
